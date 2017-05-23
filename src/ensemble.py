@@ -11,7 +11,7 @@ tf.app.flags.DEFINE_string('model_type', 'resnet', 'Supported: vggnet, googlenet
 tf.app.flags.DEFINE_integer('num_model', 5, 'How many models to ensemble.')
 tf.app.flags.DEFINE_string('loss_type', 'cmcl_v1', 'Supported: independent, mcl, cmcl_v0, cmcl_v1')
 tf.app.flags.DEFINE_integer('k', 4, 'Overlap parameter')
-tf.app.flags.DEFINE_float('alpha', 0.75, '')
+tf.app.flags.DEFINE_float('beta', 0.75, '')
 tf.app.flags.DEFINE_boolean('feature_sharing', True, 'Use feature sharing if True.')
 tf.app.flags.DEFINE_boolean('test', True, 'Run test if True else run train')
 

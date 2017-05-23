@@ -25,7 +25,7 @@ The following is an example command also written in [`run_example.sh`](run_examp
     --batch_size=64 \
     --num_model=5 \
     --k=4 \
-    --alpha=0.75 \
+    --beta=0.75 \
     --test=False
 
 * `model_type`      : supports `cnn`, `vggnet`, `googlenet`, and `resnet`.
@@ -34,5 +34,5 @@ The following is an example command also written in [`run_example.sh`](run_examp
 * `batch_size`      : use batch size 64 for `cnn`, otherwise use 128.
 * `num_model`       : number of models to ensemble.
 * `k`               : overlap parameter.
-* `alpha`           :
+* `beta`            : penalty parameter.
 * `test`            : run training if `False`, otherwise run test only without training.

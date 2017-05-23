@@ -6,7 +6,7 @@
 # num_model:  # of models to ensemble.
 # loss_type:  Supports independent, mcl, cmcl_v0, cmcl_v1.
 # k:          Overlap parameter.
-# alpha:      
+# beta:       Penalty parameter.
 # feature_sharing: Use feature sharing if True.
 COMMAND="python src/ensemble.py \
 --model_type=cnn \
@@ -14,7 +14,7 @@ COMMAND="python src/ensemble.py \
 --num_model=5 \
 --loss_type=cmcl_v1 \
 --k=4 \
---alpha=0.75 \
+--beta=0.75 \
 --feature_sharing=True"
 COMMAND_TRAIN="$COMMAND --test=False"
 COMMAND_TEST="$COMMAND --test=True"

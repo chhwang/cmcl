@@ -112,7 +112,7 @@ def loss(logits_list, labels):
             total_loss -= tf.reduce_sum(min_values)/FLAGS.batch_size
         elif FLAGS.loss_type == 'cmcl_v0':
             # CMCL version 0: confident oracle loss with exact gradient
-            a = FLAGS.alpha
+            a = FLAGS.beta
             softmax_list = [tf.clip_by_value(tf.nn.softmax(logits),1e-10, 1.0) for logits in logits_list]
             entropy_list = [-tf.log(num_class+0.)-tf.reduce_mean(tf.log(softmax),1) for softmax in softmax_list]
             loss_list = []
@@ -131,7 +131,7 @@ def loss(logits_list, labels):
             total_loss += new_loss/FLAGS.batch_size
         elif FLAGS.loss_type == 'cmcl_v1':
             # CMCL version 1: confident oracle loss with stochastic labeling
-            a = FLAGS.alpha
+            a = FLAGS.beta
             softmax_list = [tf.clip_by_value(tf.nn.softmax(logits),1e-10, 1.0) for logits in logits_list]
             entropy_list = [-tf.log(num_class+0.)-tf.reduce_mean(tf.log(softmax),1) for softmax in softmax_list]
             loss_list = []
