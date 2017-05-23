@@ -46,7 +46,6 @@ def run_train(sess):
     # record the time when training starts
     start_time = time.time()
     curr_time = start_time
-    train_time = 0
     epoch = 0
     max_test_step = cifar.TEST_SIZE // FLAGS.batch_size
 
@@ -66,7 +65,6 @@ def run_train(sess):
         # periodic evaluation
         if step % eval_period == 0:
             elapsed_time = time.time() - curr_time
-            train_time += elapsed_time
 
             # run evaluation with test dataset
             top1_err_sum = 0
@@ -96,7 +94,7 @@ def run_train(sess):
                              (datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
                               float(time.time()-start_time)/60.,
                               epoch, lr, loss, top1_err, oracle_err,
-                              np.average(err_list), 1000*train_time/eval_period))
+                              np.average(err_list), 1000*elapsed_time/eval_period))
             sys.stdout.flush()
 
             # shuffle train data
