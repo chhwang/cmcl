@@ -1,10 +1,10 @@
-# Confident Multple Choice Learning
+# Confident Multiple Choice Learning
 
 
 
 ## Preliminaries
 
-It is tested under Ubuntu Linux 16.04.1 and Python 2.7 environment, and requries following python packages to be installed:
+It is tested under Ubuntu Linux 16.04.1 and Python 2.7 environment, and requries following Python packages to be installed:
 
 * [TensorFlow](https://github.com/tensorflow/tensorflow): version 1.0.0 or above. Only GPU version is available.
 * [Torchfile](https://github.com/bshillingford/python-torchfile): version 0.0.2 or above.
