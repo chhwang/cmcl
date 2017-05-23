@@ -1,6 +1,6 @@
 # Confident Multiple Choice Learning
 
-
+Kimin Lee, Changho Hwang, KyoungSoo Park, Jinwoo Shin. Confident Multiple Choice Learning. In *International Conference on Machine Learning (ICML)*, 2017.
 
 ## Preliminaries
 
