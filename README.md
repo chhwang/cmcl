@@ -1,6 +1,6 @@
 # Confident Multiple Choice Learning
 
-Kimin Lee, Changho Hwang, KyoungSoo Park, Jinwoo Shin. Confident Multiple Choice Learning. In *International Conference on Machine Learning (ICML)*, 2017.
+This code is for the paper "Confident Multiple Choice Learning".
 
 ## Preliminaries
 
@@ -13,6 +13,12 @@ It is tested under Ubuntu Linux 16.04.1 and Python 2.7 environment, and requries
 
     pip install torchfile
 
+## Dataset 
+
+We provide the following datasets in torch format:
+
+* CIFAR-10 whitened: [pre-processed data (1.37GB)](https://www.dropbox.com/s/l5wuml42r7opo4h/cifar10_whitened.t7?dl=0)
+* SVHN (excluding the extra dataset): [pre-processed data (2.27GB)](https://www.dropbox.com/s/jibp9hiv5gj47v3/svhn_preprocessed.t7?dl=0)
 
 ## How to run
 
