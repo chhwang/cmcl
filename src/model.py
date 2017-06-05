@@ -5,7 +5,6 @@ import resnet20
 import resnet32
 import vggnet
 import googlenet
-import cnn
 
 FLAGS = tf.app.flags.FLAGS
 
@@ -19,8 +18,6 @@ elif FLAGS.model_type == 'resnet20':
     model = resnet20
 elif FLAGS.model_type == 'resnet32':
     model = resnet32
-elif FLAGS.model_type == 'cnn':
-    model = cnn
 else:
     raise ValueError('Not supported type of model: %s' % FLAGS.model_type)
 
