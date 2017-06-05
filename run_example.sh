@@ -20,7 +20,7 @@ COMMAND="python src/ensemble.py \
 COMMAND_TRAIN="$COMMAND --test=False"
 COMMAND_TEST="$COMMAND --test=True"
 
-Model="run-gpu-$1-beta-$2"
+MODEL="run-gpu-$1-beta-$2"
 
 # run train
 echo $COMMAND_TRAIN
