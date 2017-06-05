@@ -14,15 +14,18 @@ COMMAND="python src/ensemble.py \
 --num_model=5 \
 --loss_type=cmcl_v1 \
 --k=4 \
+--gpu=$1 \
 --beta=0.75 \
 --feature_sharing=True"
 COMMAND_TRAIN="$COMMAND --test=False"
 COMMAND_TEST="$COMMAND --test=True"
 
+Model="run-$1"
+
 # run train
 echo $COMMAND_TRAIN
-$COMMAND_TRAIN
+$COMMAND_TRAIN > "log_$MODEL"
 
 # run test
 echo $COMMAND_TEST
-$COMMAND_TEST
+$COMMAND_TEST >> "log_$MODEL"
