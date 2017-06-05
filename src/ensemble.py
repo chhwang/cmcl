@@ -11,6 +11,7 @@ tf.app.flags.DEFINE_string('model_type', 'resnet32', 'Supported: vggnet, googlen
 tf.app.flags.DEFINE_integer('num_model', 5, 'How many models to ensemble.')
 tf.app.flags.DEFINE_string('loss_type', 'cmcl_v1', 'Supported: independent, mcl, cmcl_v0, cmcl_v1')
 tf.app.flags.DEFINE_integer('k', 4, 'Overlap parameter')
+tf.app.flags.DEFINE_integer('gpu', 0, 'GPU to use')
 tf.app.flags.DEFINE_float('beta', 0.75, '')
 tf.app.flags.DEFINE_boolean('feature_sharing', True, 'Use feature sharing if True.')
 tf.app.flags.DEFINE_boolean('test', True, 'Run test if True else run train')
@@ -20,7 +21,7 @@ FLAGS = tf.app.flags.FLAGS
 import model
 
 # Set GPU to use. Only one GPU supported.
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+os.environ['CUDA_VISIBLE_DEVICES'] = str(FLAGS.gpu)
 
 
 def run_train(sess):
