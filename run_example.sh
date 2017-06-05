@@ -1,7 +1,7 @@
 ###### Example script to run the code ######
 #!/bin/sh
 
-# model_type: Supports cnn, vggnet, googlenet, resnet.
+# model_type: Supports cnn, vggnet, googlenet, resnet20, resnet32.
 # batch_size: Use batch size 64 for cnn, otherwise use 128.
 # num_model:  # of models to ensemble.
 # loss_type:  Supports independent, mcl, cmcl_v0, cmcl_v1.
