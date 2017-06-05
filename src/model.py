@@ -120,7 +120,7 @@ def loss(logits_list, labels):
             entropy_list = [-tf.log(num_class+0.)-tf.reduce_mean(tf.log(softmax),1) for softmax in softmax_list]
             loss_list = []
             for m in range(FLAGS.num_model):
-                loss_list.append(a*closs_list[m] + (1.-a)*tf.add_n(entropy_list[:m]+entropy_list[m+1:]))
+                loss_list.append(closs_list[m] + a*tf.add_n(entropy_list[:m]+entropy_list[m+1:]))
             with tf.device('/cpu:0'):
                 temp, min_index = tf.nn.top_k(-tf.transpose(loss_list), FLAGS.k)
             min_index = tf.transpose(min_index)
@@ -129,8 +129,8 @@ def loss(logits_list, labels):
             for m in range(FLAGS.num_model):
                 for topk in range(FLAGS.k):
                     condition = tf.equal(min_index[topk], m)
-                    new_loss += tf.reduce_sum(tf.where(condition, a*closs_list[m] - (1.-a)*entropy_list[m], tf.zeros(closs_list[0].get_shape())))
-            new_loss += tf.reduce_sum((1.-a)*tf.add_n(entropy_list))
+                    new_loss += tf.reduce_sum(tf.where(condition, closs_list[m] - a*entropy_list[m], tf.zeros(closs_list[0].get_shape())))
+            new_loss += tf.reduce_sum(a*tf.add_n(entropy_list))
             total_loss += new_loss/FLAGS.batch_size
         elif FLAGS.loss_type == 'cmcl_v1':
             # CMCL version 1: confident oracle loss with stochastic labeling
@@ -139,7 +139,7 @@ def loss(logits_list, labels):
             entropy_list = [-tf.log(num_class+0.)-tf.reduce_mean(tf.log(softmax),1) for softmax in softmax_list]
             loss_list = []
             for m in range(FLAGS.num_model):
-                loss_list.append(a*closs_list[m] + (1.-a)*tf.add_n(entropy_list[:m]+entropy_list[m+1:]))
+                loss_list.append(closs_list[m] + a*tf.add_n(entropy_list[:m]+entropy_list[m+1:]))
             with tf.device('/cpu:0'):
                 temp, min_index = tf.nn.top_k(-tf.transpose(loss_list), FLAGS.k)
             min_index = tf.transpose(min_index)
@@ -157,8 +157,8 @@ def loss(logits_list, labels):
 
                 classification_loss = \
                     tf.where(total_condition,
-                              tf.constant([a]*FLAGS.batch_size),
-                              tf.constant([1-a]*FLAGS.batch_size)) * \
+                              tf.constant([1.]*FLAGS.batch_size),
+                              tf.constant([a]*FLAGS.batch_size)) * \
                     tf.nn.sparse_softmax_cross_entropy_with_logits(logits=logits_list[m], labels=new_labels)
                 total_loss += tf.reduce_mean(classification_loss)
         else:
