@@ -1,7 +1,8 @@
 import tensorflow as tf
 import cifar
 import layers
-import resnet
+import resnet20
+import resnet32
 import vggnet
 import googlenet
 import cnn
@@ -14,8 +15,10 @@ if FLAGS.model_type == 'vggnet':
     model = vggnet
 elif FLAGS.model_type == 'googlenet':
     model = googlenet
-elif FLAGS.model_type == 'resnet':
-    model = resnet
+elif FLAGS.model_type == 'resnet20':
+    model = resnet20
+elif FLAGS.model_type == 'resnet32':
+    model = resnet32
 elif FLAGS.model_type == 'cnn':
     model = cnn
 else:

@@ -7,7 +7,7 @@ import time, sys, os
 
 tf.app.flags.DEFINE_string('data_dir', './dataset', 'Directoty to store input dataset')
 tf.app.flags.DEFINE_integer('batch_size', 128, 'Number of images to process in a batch.')
-tf.app.flags.DEFINE_string('model_type', 'resnet', 'Supported: vggnet, googlenet, resnet')
+tf.app.flags.DEFINE_string('model_type', 'resnet32', 'Supported: vggnet, googlenet, resnet20, resnet32')
 tf.app.flags.DEFINE_integer('num_model', 5, 'How many models to ensemble.')
 tf.app.flags.DEFINE_string('loss_type', 'cmcl_v1', 'Supported: independent, mcl, cmcl_v0, cmcl_v1')
 tf.app.flags.DEFINE_integer('k', 4, 'Overlap parameter')
