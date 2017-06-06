@@ -174,8 +174,8 @@ def main(argv=None):
         saver = tf.train.Saver()
 
         if FLAGS.test:
-            if not os.path.exists(ckpt_path):
-                raise ValueError('Checkpoint %s does not exist.' % ckpt_path)
+            #if not os.path.exists(ckpt_path):
+            #    raise ValueError('Checkpoint %s does not exist.' % ckpt_path)
             saver.restore(sess, ckpt_path)
             print('Restored variabels from %s.' % ckpt_path)
             run_test(sess)
