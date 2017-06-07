@@ -4,10 +4,19 @@ from feature_sharing import feature_sharing
 
 FLAGS = tf.app.flags.FLAGS
 
-MAX_STEPS = 39063
-VAR_LIST = [0.1, 0.02, 0.004, 0.0008]
-PIVOT_LIST = [0, 9766, 19532, 29297]
-WD_FACTOR = 0.0005
+if FLAGS.dataset == 'cifar':
+    MAX_STEPS = 39063
+    VAR_LIST = [0.1, 0.02, 0.004, 0.0008]
+    PIVOT_LIST = [0, 9766, 19532, 29297]
+    WD_FACTOR = 0.0005
+elif FLAGS.dataset == 'svhn':
+    MAX_STEPS = 58200
+    VAR_LIST = [0.1, 0.02, 0.004, 0.0008]
+    PIVOT_LIST = [0, 14550, 29100, 43650]
+    WD_FACTOR = 0.0005
+else:
+    raise ValueError('Not supported dataset: %s' % FLAGS.dataset)
+
 def OPTIMIZER(lr):
     return tf.train.MomentumOptimizer(lr, 0.9, use_nesterov=True)
 

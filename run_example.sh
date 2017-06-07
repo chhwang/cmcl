@@ -1,6 +1,7 @@
 ###### Example script to run the code ######
 #!/bin/sh
 
+# dataset:    Supports cifar, svhn.
 # model_type: Supports vggnet, googlenet, resnet20, resnet32.
 # batch_size: We use batch size 128.
 # num_model:  # of models to ensemble.
@@ -9,10 +10,11 @@
 # beta:       Penalty parameter.
 # feature_sharing: Use feature sharing if True.
 COMMAND="python src/ensemble.py \
+--dataset=cifar \
 --model_type=resnet32 \
 --batch_size=128 \
 --num_model=5 \
---loss_type=cmcl_v1 \
+--loss_type=cmcl_v0 \
 --k=4 \
 --gpu=$1 \
 --beta=$2 \

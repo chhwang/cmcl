@@ -3,9 +3,11 @@ from datetime import datetime
 import tensorflow as tf
 import numpy as np
 import cifar
+import svhn
 import time, sys, os
 
 tf.app.flags.DEFINE_string('data_dir', './dataset', 'Directoty to store input dataset')
+tf.app.flags.DEFINE_string('dataset', 'cifar', 'Supported: cifar, svhn')
 tf.app.flags.DEFINE_integer('batch_size', 128, 'Number of images to process in a batch.')
 tf.app.flags.DEFINE_string('model_type', 'resnet32', 'Supported: vggnet, googlenet, resnet20, resnet32')
 tf.app.flags.DEFINE_integer('num_model', 5, 'How many models to ensemble.')
@@ -23,6 +25,14 @@ import model
 # Set GPU to use. Only one GPU supported.
 os.environ['CUDA_VISIBLE_DEVICES'] = str(FLAGS.gpu)
 
+# Set dataset
+if FLAGS.dataset == 'cifar':
+    dataset = cifar
+elif FLAGS.dataset == 'svhn':
+    dataset = svhn
+else:
+    raise ValueError('Not supported dataset: %s' % FLAGS.dataset)
+
 
 def run_train(sess):
     """Train the model.
@@ -30,14 +40,14 @@ def run_train(sess):
       sess: TensorFlow session to run the model.
     """
     # get data
-    train_images, train_labels = cifar.inputs(FLAGS.data_dir, test=False)
-    test_images, test_labels = cifar.inputs(FLAGS.data_dir, test=True)
+    train_images, train_labels = dataset.inputs(FLAGS.data_dir, test=False)
+    test_images, test_labels = dataset.inputs(FLAGS.data_dir, test=True)
 
     # shuffle train data
-    train_images, train_labels = cifar.shuffle(train_images, train_labels)
+    train_images, train_labels = dataset.shuffle(train_images, train_labels)
 
     # period of evaluation
-    eval_period = cifar.TRAIN_SIZE // FLAGS.batch_size
+    eval_period = dataset.TRAIN_SIZE // FLAGS.batch_size
 
     # get placeholders
     is_train = tf.get_collection('is_train')[0]
@@ -48,13 +58,13 @@ def run_train(sess):
     start_time = time.time()
     curr_time = start_time
     epoch = 0
-    max_test_step = cifar.TEST_SIZE // FLAGS.batch_size
+    max_test_step = dataset.TEST_SIZE // FLAGS.batch_size
 
     # loop through training steps
     train_idx = np.array(range(FLAGS.batch_size))
     for step in xrange(model.MAX_STEPS):
         # range of the next train data
-        train_idx[train_idx >= cifar.TRAIN_SIZE] -= cifar.TRAIN_SIZE
+        train_idx[train_idx >= dataset.TRAIN_SIZE] -= dataset.TRAIN_SIZE
 
         # run training
         _, gstep, lr, loss = sess.run(tf.get_collection('train_ops'),
@@ -73,7 +83,7 @@ def run_train(sess):
             err_list_sum = np.zeros((FLAGS.num_model,), dtype=np.float)
             test_idx = np.array(range(FLAGS.batch_size))
             for test_step in range(max_test_step):
-                test_idx[test_idx >= cifar.TEST_SIZE] -= cifar.TEST_SIZE
+                test_idx[test_idx >= dataset.TEST_SIZE] -= dataset.TEST_SIZE
                 result = sess.run(tf.get_collection('test_ops'),
                                   feed_dict={is_train: False,
                                              batch_images: test_images[test_idx],
@@ -99,7 +109,7 @@ def run_train(sess):
             sys.stdout.flush()
 
             # shuffle train data
-            train_images, train_labels = cifar.shuffle(train_images, train_labels)
+            train_images, train_labels = dataset.shuffle(train_images, train_labels)
             epoch += 1
             curr_time = time.time()
 
@@ -110,7 +120,7 @@ def run_test(sess):
       sess: TensorFlow session to run the model.
     """
     # get data
-    test_images, test_labels = cifar.inputs(FLAGS.data_dir, test=True)
+    test_images, test_labels = dataset.inputs(FLAGS.data_dir, test=True)
 
     # get placeholders
     is_train = tf.get_collection('is_train')[0]
@@ -121,12 +131,12 @@ def run_test(sess):
     oracle_err_sum = 0
     err_list_sum = np.zeros((FLAGS.num_model,), dtype=np.float)
     test_idx = np.array(range(FLAGS.batch_size))
-    max_test_step = cifar.TEST_SIZE // FLAGS.batch_size
+    max_test_step = dataset.TEST_SIZE // FLAGS.batch_size
 
     print('Running Test ... ')
     start_time = time.time()
     for test_step in range(max_test_step):
-        test_idx[test_idx >= cifar.TEST_SIZE] -= cifar.TEST_SIZE
+        test_idx[test_idx >= dataset.TEST_SIZE] -= dataset.TEST_SIZE
         result = sess.run(tf.get_collection('test_ops'),
                           feed_dict={is_train: False,
                                      batch_images: test_images[test_idx],
@@ -166,7 +176,8 @@ def main(argv=None):
     model.build()
 
     # create a local session to run training
-    with tf.Session() as sess:
+    config = tf.ConfigProto(allow_soft_placement=True)
+    with tf.Session(config=config) as sess:
         # log the graph data
         writer = tf.summary.FileWriter(log_dir, sess.graph)
 
