@@ -32,9 +32,10 @@ The following is an example command also written in [`run_example.sh`](run_examp
     --loss_type=cmcl_v0 \
     --k=4 \
     --beta=0.75 \
-    --feature_sharing=True
+    --feature_sharing=True \
+    --test=False
 
-* `dataset`         : supports `cifar`, `svhn`.
+* `dataset`         : supports `cifar` and `svhn`.
 * `model_type`      : supports `vggnet`, `googlenet`, and `resnet`.
 * `batch_size`      : we use batch size 128.
 * `num_model`       : number of models to ensemble.
@@ -42,3 +43,4 @@ The following is an example command also written in [`run_example.sh`](run_examp
 * `k`               : overlap parameter.
 * `beta`            : penalty parameter.
 * `feature_sharing` : use feature sharing if `True`.
+* `test`            : if `True`, run test only, otherwise run training also.
