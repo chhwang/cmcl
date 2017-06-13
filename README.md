@@ -35,7 +35,7 @@ The following is an example command also written in [`run_example.sh`](run_examp
     --feature_sharing=True \
     --test=False
 
-* `dataset`         : supports `cifar` and `svhn`.
+* `dataset`         : supports `cifar` and `svhn`.
 * `model_type`      : supports `vggnet`, `googlenet`, and `resnet`.
 * `batch_size`      : we use batch size 128.
 * `num_model`       : number of models to ensemble.
