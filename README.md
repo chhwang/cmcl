@@ -43,4 +43,4 @@ The following is an example command also written in [`run_example.sh`](run_examp
 * `k`               : overlap parameter.
 * `beta`            : penalty parameter.
 * `feature_sharing` : use feature sharing if `True`.
-* `test`            : if `True`, run test only, otherwise run training also.
+* `test`            : if `True`, test the result of previous training, otherwise run a new training.
