@@ -14,15 +14,15 @@ COMMAND="python src/ensemble.py \
 --model_type=resnet \
 --batch_size=128 \
 --num_model=5 \
---loss_type=independent \
---k=0 \
+--loss_type=mcl \
+--k=1 \
 --gpu=$1 \
 --beta=0 \
 --feature_sharing=False"
 COMMAND_TRAIN="$COMMAND --test=False"
 COMMAND_TEST="$COMMAND --test=True"
 
-MODEL="IE_run-gpu-$1"
+MODEL="MCL_run-gpu-$1"
 
 # run train
 echo $COMMAND_TRAIN
