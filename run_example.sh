@@ -2,7 +2,7 @@
 #!/bin/sh
 
 # dataset:    Supports cifar, svhn.
-# model_type: Supports vggnet, googlenet, resnet20, resnet32.
+# model_type: Supports vggnet, googlenet, resnet.
 # batch_size: We use batch size 128.
 # num_model:  # of models to ensemble.
 # loss_type:  Supports independent, mcl, cmcl_v0, cmcl_v1.
@@ -11,7 +11,7 @@
 # feature_sharing: Use feature sharing if True.
 COMMAND="python src/ensemble.py \
 --dataset=cifar \
---model_type=resnet32 \
+--model_type=resnet \
 --batch_size=128 \
 --num_model=5 \
 --loss_type=cmcl_v0 \
