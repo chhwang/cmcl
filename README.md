@@ -17,8 +17,8 @@ It is tested under Ubuntu Linux 16.04.1 and Python 2.7 environment, and requries
 
 We provide the following datasets in torch format:
 
-* CIFAR-10 whitened: [pre-processed data (1.37GB)](https://www.dropbox.com/s/l5wuml42r7opo4h/cifar10_whitened.t7?dl=0)
-* SVHN (excluding the extra dataset): [pre-processed data (2.27GB)](https://www.dropbox.com/s/jibp9hiv5gj47v3/svhn_preprocessed.t7?dl=0)
+* CIFAR-10 whitened: [pre-processed data (1.37GB)](https://www.ndsl.kaist.edu/~changho/cmcl/dataset/cifar10_whitened.t7)
+* SVHN (excluding the extra dataset): [pre-processed data (2.27GB)](https://www.ndsl.kaist.edu/~changho/cmcl/dataset/svhn_preprocessed.t7)
 
 ## Example scripts
 
