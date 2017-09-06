@@ -1,4 +1,4 @@
-# Author: Kimin Lee (pokaxpoka@gmail.com) and Changho Hwang (ch.hwang@gmail.com)
+# Author: Kimin Lee (pokaxpoka@gmail.com), Changho Hwang (ch.hwang128@gmail.com)
 # GitHub: https://github.com/chhwang/cmcl
 # ==============================================================================
 import tensorflow as tf

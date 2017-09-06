@@ -1,4 +1,4 @@
-# Author: Kimin Lee (pokaxpoka@gmail.com) and Changho Hwang (ch.hwang@gmail.com)
+# Author: Kimin Lee (pokaxpoka@gmail.com), Changho Hwang (ch.hwang128@gmail.com)
 # GitHub: https://github.com/chhwang/cmcl
 # ==============================================================================
 from __future__ import print_function
