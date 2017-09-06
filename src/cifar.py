@@ -1,3 +1,6 @@
+# Author: Kimin Lee (pokaxpoka@gmail.com) and Changho Hwang (ch.hwang@gmail.com)
+# GitHub: https://github.com/chhwang/cmcl
+# ==============================================================================
 from __future__ import print_function
 
 import tensorflow as tf

@@ -1,3 +1,6 @@
+# Author: Kimin Lee (pokaxpoka@gmail.com) and Changho Hwang (ch.hwang@gmail.com)
+# GitHub: https://github.com/chhwang/cmcl
+# ==============================================================================
 import tensorflow as tf
 
 def feature_sharing(features):
