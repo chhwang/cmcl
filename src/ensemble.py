@@ -191,7 +191,7 @@ def main(argv=None):
             #if not os.path.exists(ckpt_path):
             #    raise ValueError('Checkpoint %s does not exist.' % ckpt_path)
             saver.restore(sess, ckpt_path)
-            print('Restored variabels from %s.' % ckpt_path)
+            print('Restored variables from %s.' % ckpt_path)
             run_test(sess)
         else:
             tf.global_variables_initializer().run()
