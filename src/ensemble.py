@@ -180,6 +180,8 @@ def main(argv=None):
 
     # create a local session to run training
     config = tf.ConfigProto(allow_soft_placement=True)
+    config.gpu_options.allow_growth = True
+
     with tf.Session(config=config) as sess:
         # log the graph data
         writer = tf.summary.FileWriter(log_dir, sess.graph)
